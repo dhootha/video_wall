@@ -25,8 +25,8 @@ public class VideoClipCollection {
     }
   }
     
-  public static void main(String[] args) {
-    VideoClipCollection clip = new VideoClipCollection("data");
-  }
+  // public static void main(String[] args) {
+  //   VideoClipCollection clip = new VideoClipCollection("data");
+  // }
 
 }
