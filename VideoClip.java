@@ -27,8 +27,4 @@ public class VideoClip {
     profileImages = new File[sourceDirectory.listFiles(imageFilter).length];
   }
     
-  // public static void main(String[] args) {
-  //   VideoClip clip = new VideoClip("clips");
-  // }
-
 }
