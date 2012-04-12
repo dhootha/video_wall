@@ -1,3 +1,4 @@
+
 VideoWall
   - displays the video profiles for each VideoClip in VideoData
   - GUI must be scrollable (vertically)
