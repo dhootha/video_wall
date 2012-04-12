@@ -19,6 +19,8 @@ import java.util.Iterator;
 import java.util.concurrent.Semaphore;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
+import java.io.*;
+import javax.imageio.ImageIO;
 
 //drawing using paintComponent based on:
 //http://stackoverflow.com/questions/299495/java-swing-how-to-add-an-image-to-a-jpanel
@@ -61,6 +63,31 @@ public class Wall extends JPanel implements MouseWheelListener, AdjustmentListen
 	
 	public Wall(){
 		genericConstructor();
+	}
+	
+	public Wall(String path){
+	  double scale=0.05;
+	  VideoClipCollection clipCollection = new VideoClipCollection(path);
+	  
+	  for(VideoClip clip : clipCollection.getVideoClips()){
+	    for(File imageFile : clip.getProfileImages()){
+         BufferedImage image = null;
+         try {
+           image = ImageIO.read(imageFile);
+         } catch (IOException e) {
+           System.out.println("unable to load image");
+           System.exit(0);
+         }
+         BufferedImage newImage = new BufferedImage((int)(image.getWidth()*scale), (int)(image.getHeight()*scale), image.getType());
+         Graphics2D g = newImage.createGraphics();
+         g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
+         g.drawImage(image, 0, 0, (int)(image.getWidth()*scale), (int)(image.getHeight()*scale), null);
+         g.dispose();
+         this.addImage(newImage);
+	    }
+	  }
+    
+    genericConstructor();
 	}
 	
 	private void genericConstructor(){
