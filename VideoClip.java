@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class VideoClip {
   
   private File aviClip;
-  private File[] profileImages;
+  private ArrayList<File> profileImages;
   
   // path will be relative to the directory VideoClip.java lives in
   public VideoClip(String path){
@@ -24,7 +24,10 @@ public class VideoClip {
     if(sourceDirectory.listFiles(imageFilter).length < 1){
       throw new IllegalArgumentException("at least one video profile image must be provided");
     }
-    profileImages = new File[sourceDirectory.listFiles(imageFilter).length];
+    profileImages = new ArrayList<File>();
+    for (File image : sourceDirectory.listFiles(imageFilter)){
+      profileImages.add(image);
+    }
   }
     
 }
