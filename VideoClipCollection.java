@@ -24,5 +24,9 @@ public class VideoClipCollection {
       videoClips.add(new VideoClip(subPath.toString()));
     }
   }
-    
+  
+  public ArrayList<VideoClip> getVideoClips(){
+    return videoClips;
+  }
+      
 }

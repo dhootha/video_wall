@@ -29,5 +29,13 @@ public class VideoClip {
       profileImages.add(image);
     }
   }
-    
+  
+  public File getAviClip(){
+    return aviClip;
+  }
+  
+  public ArrayList<File> getProfileImages(){
+    return profileImages;
+  }
+      
 }
