@@ -181,7 +181,7 @@ public class Wall extends JPanel implements MouseWheelListener, AdjustmentListen
 				//draw the off screen portion of the image at the beginning of the next row
 				y = y + imageHeight; //advance to next row
 				x = -(viewableWidth - x); //offset the image so that the previously displayed portion is hidden
-				graphics.drawImage(currentImage, x, y, currentImageWidth, imageHeight, null);
+				graphics.drawImage(currentImage, x, y, null);
 			}
 		}
 		
