@@ -28,5 +28,23 @@ public class VideoClipCollection {
   public ArrayList<VideoClip> getVideoClips(){
     return videoClips;
   }
+  
+  // When a profile is clicked, use this function to get the corresponding VideoClip
+  // with the profiles index. Note: Uses 1 as first index (instead of 0).
+  public VideoClip getVideoClipByProfileIndex(int index){
+    int lowerBound = 0;
+    int upperBound = 0;
+    
+    for (VideoClip clip : videoClips){
+      upperBound = upperBound + clip.getProfileImages().size();
+      
+      if (lowerBound < index && upperBound >= index){
+        return clip;
+      }
+      lowerBound = upperBound;
+    }
+    
+    throw new RuntimeException("index out of bounds");
+  }
       
 }
