@@ -1,0 +1,25 @@
+
+VideoWall
+  - displays the video profiles for each VideoClip in VideoData
+  - GUI must be scrollable (vertically)
+  - GUI must be resizable (when user scrolls)
+  - able to calculate frame numbers based on click positions
+  - when clicked a FrameViewer is instantiated and a frame number and VideoData are passed, the returned image is displayed
+
+FrameViewer
+  - instantiated with a frame number
+  - uses AVILoader to get the frame from the avi
+  - draws an nice looking border around the frame and returns it as a BufferedImage
+
+AVILoader
+  - given the path to an avi and a frame number, extracts the frame and returns it
+
+VideoData
+  - this class is a container for multiple VideoClip objects
+  - this class looks in a directory structure passed to it and instantiates a VideoClip object for each avi it finds (each avi and its profiles will be stored in a sperate folder)
+
+
+VideoClip
+  - this class will be used as a data container for a single video clip
+  - instantiated with path to video clip
+  - all profile images in the same folder as the avi are loaded into an ArrayList as BufferedImages in the order they correspond to in the video
