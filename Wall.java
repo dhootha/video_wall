@@ -1,5 +1,6 @@
-//Author: Mark Fisher
+//Author: Mark Fisher and Philip Sanders
 //fisher38@iupui.edu
+//pssander@iupui.edu
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -47,6 +48,8 @@ public class Wall extends JPanel implements MouseWheelListener, AdjustmentListen
 	private int frameDisplayFromProfile = 0;
 	private boolean displayFrame = false; //true if a frame is being displayed
 	
+	VideoClipCollection clipCollection ;
+	
 	public Wall(ArrayList<BufferedImage> profiles){
 		//use a semaphore so that the images are not accessed when adding the image
 		try {
@@ -67,7 +70,7 @@ public class Wall extends JPanel implements MouseWheelListener, AdjustmentListen
 	
 	public Wall(String path){
 	  double scale=0.05;
-	  VideoClipCollection clipCollection = new VideoClipCollection(path);
+	  clipCollection = new VideoClipCollection(path);
 	  
 	  for(VideoClip clip : clipCollection.getVideoClips()){
 	    for(File imageFile : clip.getProfileImages()){
@@ -165,7 +168,59 @@ public class Wall extends JPanel implements MouseWheelListener, AdjustmentListen
 		graphics.setColor(Color.RED);
 		graphics.drawLine(frameDisplayX, frameDisplayY - 1, frameDisplayX, frameDisplayY - imageHeight);
 		
-		//Put call to frame displaying code here!!!
+		/*From here to end of function is Philip Sanders' Code 
+		 * email= pssander@iupui.edu */
+	
+		//note that this a place holder for the actual javacv code call
+		//BufferedImage frameImage = aviloader.getImage(frameNumber, frameProfile);//Get buffered image from external
+		
+		graphics.setColor(Color.GRAY);
+
+		//Test Cases
+		int frameImgHeight = imageHeight;	//These will be replaced by function cars from the frame and its resizer
+		int frameImgWidth = (int) (frameImgHeight * ((double)frameImage.getWidth() / (double)frameImage.getHeight()));
+		int triWidth = 10;
+		int triHeight = 5;						
+		int triYStart = frameDisplayY;
+		int rectOffset = 5;
+		int rectHeight = frameImgHeight + rectOffset;	//Offset is 10
+		int rectWidth = frameImgWidth + rectOffset;		
+		int rectRight = frameDisplayX + rectWidth/2;
+		int rectLeft = frameDisplayX - rectWidth/2;
+		int rectTop = frameDisplayY + triHeight;
+
+
+		int viewableWidth = this.getWidth() - bar.getWidth();
+		//Controls if frame will overflow box vertically and compensates
+		
+		
+		
+		if(frameDisplayY + rectHeight + triHeight> this.getHeight()) 
+		{
+			//Supposing Height is less than the bottom and 
+			//Putting the frame on top will still display (thats what the and statement is for)
+			triHeight = -triHeight; 						//Reverse the triangle
+			triYStart = triYStart - imageHeight;
+			rectTop = triYStart +triHeight - rectHeight;
+		}
+		
+		//Controls if frame will overflow box horizontally and compensates
+		if(rectRight > viewableWidth)		//Triggers if box is too big in right direction
+		{
+			rectLeft = rectLeft - (rectRight - viewableWidth);
+		}
+		if(rectLeft < 0)	//Triggers if box is too big in left direction
+		{
+			rectLeft = 0;			
+		}
+		
+		int xTri[] = {frameDisplayX, frameDisplayX+triWidth, frameDisplayX-triWidth}; //Xcoords of Triangle
+		int yTri[] = {triYStart, triYStart+triHeight, triYStart+triHeight};			  //Ycoords of Triangle
+		graphics.fillPolygon(xTri, yTri,3);											 //Draw Triangle
+		graphics.fillRect(rectLeft, rectTop, rectWidth, rectHeight);				//Draw Rectangle Frame
+		graphics.drawImage(frameImage, rectLeft +rectOffset/2, rectTop+rectOffset/2, frameImgWidth, frameImgHeight, null); //Draw Frame Image
+		
+		//End Philip Sanders Code
 	}
 
 	private void drawImages(Graphics graphics){
