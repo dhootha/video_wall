@@ -171,9 +171,10 @@ public class Wall extends JPanel implements MouseWheelListener, AdjustmentListen
 		/*From here to end of function is Philip Sanders' Code 
 		 * email= pssander@iupui.edu */
 	
-		//note that this a place holder for the actual javacv code call
-		//BufferedImage frameImage = aviloader.getImage(frameNumber, frameProfile);//Get buffered image from external
-		
+		//AviLoader that uses JAVACV - requires proper path as a string
+		aviLoader aviFrame = new aviLoader(frameDisplayNumber, "assets\\0\\33_seconds.avi");
+		BufferedImage frameImage = aviFrame.getFrame();//Get buffered image from external
+				
 		graphics.setColor(Color.GRAY);
 
 		//Test Cases
