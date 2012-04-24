@@ -3,7 +3,7 @@ import java.io.*;
 public class AVIFileFilter implements FileFilter {
   
   // override FileFilter#accept to validate files
-  private final String[] acceptedExtensions = new String[] {"avi"};
+  private final String[] acceptedExtensions = new String[] {"avi","mp4"};
   
   public boolean accept(File file){
     for (String extension : acceptedExtensions){

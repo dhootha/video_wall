@@ -172,7 +172,7 @@ public class Wall extends JPanel implements MouseWheelListener, AdjustmentListen
 		 * email= pssander@iupui.edu */
 	
 		//AviLoader that uses JAVACV - requires proper path as a string
-		String videoPath = clipCollection.getVideoClipByProfileIndex(frameDisplayFromProfile).getAviClip();
+		String videoPath = clipCollection.getVideoClipByProfileIndex(frameDisplayFromProfile).getAviClip().getPath();
 		aviLoader aviFrame = new aviLoader(frameDisplayNumber, videoPath);
 		BufferedImage frameImage = aviFrame.getFrame();//Get buffered image from external
 				

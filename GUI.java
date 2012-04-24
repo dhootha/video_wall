@@ -16,7 +16,7 @@ public class GUI extends JFrame{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setTitle("VideoWall");
 		
-		wall = new Wall("assets/");
+		wall = new Wall("assets");
 		wall.setImageHeight(75);
 		wall.setMinimumImageHeight(70);
 		this.add(wall);
