@@ -81,12 +81,13 @@ public class Wall extends JPanel implements MouseWheelListener, AdjustmentListen
            System.out.println("unable to load image");
            System.exit(0);
          }
+         /*
          BufferedImage newImage = new BufferedImage((int)(image.getWidth()*scale), (int)(image.getHeight()*scale), image.getType());
          Graphics2D g = newImage.createGraphics();
          g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
          g.drawImage(image, 0, 0, (int)(image.getWidth()*scale), (int)(image.getHeight()*scale), null);
-         g.dispose();
-         this.addImage(newImage);
+         g.dispose();*/
+         this.addImage(image);
 	    }
 	  }
     
@@ -173,8 +174,8 @@ public class Wall extends JPanel implements MouseWheelListener, AdjustmentListen
 	
 		//AviLoader that uses JAVACV - requires proper path as a string
 		String videoPath = clipCollection.getVideoClipByProfileIndex(frameDisplayFromProfile).getAviClip().getPath();
-		double profilePercentage = (double) frameDisplayNumber / (double) images.get(frameDisplayFromProfile).getWidth();
-		aviLoader aviFrame = new aviLoader(frameDisplayNumber, videoPath);
+		double profilePercentage = (double) frameDisplayNumber / (double) images.get(frameDisplayFromProfile-1).getWidth();
+		aviLoader aviFrame = new aviLoader(profilePercentage, videoPath);
 		BufferedImage frameImage = aviFrame.getFrame();//Get buffered image from external
 				
 		graphics.setColor(Color.GRAY);

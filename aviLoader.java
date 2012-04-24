@@ -5,12 +5,13 @@ import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
 public class aviLoader{
 	BufferedImage outputImage;
-	int frameNum;
+	double framePercent;
     String fileName;
+    int frameNum;
     boolean looking = true;
     
-    public aviLoader(int frame, String name) {
-    	frameNum = frame;
+    public aviLoader(double Percent, String name) {
+    	framePercent = Percent;
     	fileName = name;
     }   
     
@@ -19,6 +20,8 @@ public class aviLoader{
         try {
         	int i = 0;
             grabber.start();
+            int totalFrames = grabber.getLengthInFrames();
+            frameNum = (int)(framePercent * totalFrames);
             IplImage img;
             while (looking) {
                 img = grabber.grab(); //grabs frame
